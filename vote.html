@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vote Submission</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2em;
+    }
+    .vote-options {
+      margin-bottom: 1em;
+    }
+    .comment-box {
+      width: 100%;
+      height: 80px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Extraordinary General Meeting - Vote</h2>
+
+  <form id="voteForm">
+    <div class="vote-options">
+      <label><input type="radio" name="vote" value="For" required> For</label><br>
+      <label><input type="radio" name="vote" value="Against"> Against</label><br>
+      <label><input type="radio" name="vote" value="Abstain"> Abstain</label>
+    </div>
+
+    <div>
+      <label for="comments">Additional Comments (optional):</label><br>
+      <textarea id="comments" class="comment-box" name="comments" placeholder="Type your comments here..."></textarea>
+    </div>
+
+    <button type="submit">Submit Vote</button>
+  </form>
+
+  <script>
+    document.getElementById('voteForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const vote = document.querySelector('input[name="vote"]:checked').value;
+      const comments = document.getElementById('comments').value;
+      const subject = encodeURIComponent("EGM Vote Submission");
+      const body = encodeURIComponent(`Vote: ${vote}\nComments: ${comments}`);
+      window.location.href = `mailto:peter.wedd@outlook.com?subject=${subject}&body=${body}`;
+    });
+  </script>
+
+</body>
+</html>
